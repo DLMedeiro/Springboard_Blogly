@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+
+{%block title%}Users Home Page{%endblock%}
+
+{%block content%}
+    <h1>List of all Users</h1>
+    <div class="outer_container">
+        <ul>
+            {%for person in people%}
+                <li><a href="/{{person.id}}/details" class="list">{{person.first_name}} {{person.last_name}}</a></li>
+            {%endfor%}
+        </ul>
+    
+        <form action="/new_user">
+            <button class="btn_add">Create New User</button>
+        </form>
+
+    </div>
+
+
+{%endblock%}

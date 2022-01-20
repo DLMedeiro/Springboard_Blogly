@@ -1,0 +1,79 @@
+*{
+    color: rgb(2, 61, 15);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;    
+}
+
+h1 {
+    background-color: rgba(0, 128, 0, 0.171);
+    padding: 5px 10px;
+}
+
+footer {
+    width: 100%;
+    background-color: rgba(0, 128, 0, 0.171);
+    padding: 5px;
+}
+
+ul {
+    padding: 0 20px;
+}
+
+.outer_container{
+    padding: 5px 40px;
+}
+
+.inner_container p, .inner_container form{
+    display: inline-block;
+    padding-top: 10px;
+}
+
+.new_form{
+    padding: 5px 40px;
+}
+.new_form input, .new_form label{
+    display: block;
+    padding-top: 5px;
+}
+.edit_form input, .edit_form label{
+    display: block;
+    padding-top: 5px;
+}
+
+a {
+    color:rgb(2, 61, 15);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.list{
+    color:rgb(2, 61, 15);
+}
+
+.list:hover{
+    text-decoration: underline rgb(2, 61, 15);
+
+}
+
+.btn_add {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0, 128, 0, 0.61);
+    transition: background-color .25s ease-in;
+    font-size: 16px;
+}
+.btn_add:hover{
+    background-color: rgba(0, 128, 0, 0.171);
+}
+
+.btn_remove {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0, 128, 0, 0.171);
+    transition: background-color .25s ease-in;
+    font-size: 16px;
+}
+.btn_remove:hover{
+    background-color: rgba(0, 128, 0, 0.61);
+}

@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+
+{%block content%}
+    <h1>Edit {{people.first_name}}'s Account</h1>
+
+    <!-- {%for msg in get_flashed_messages()%}
+        <p>{{msg}}</p>
+    {%endfor%} -->
+    <div class="outer_container">
+        <form method="POST" class="edit_form">
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" id="first_name" value={{people.first_name}}>
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" id="last_name" value={{people.last_name}}>
+            <label for="user_name">Username</label>
+            <input type="text" name="user_name" id="user_name" value={{people.user_name}}>
+            <label for="image_url">Image URL</label>
+            <input type="text" name="image_url" id="image_url" value={{people.img_url}}>
+        <div class="inner_container">
+            <button class = "btn_add">Update</button>
+        </form>
+        <form action="/">
+            <button class = "btn_remove">Cancel</button>
+        </form>
+        </div>
+    </div>
+
+
+{%endblock%}
+
+{%block footer%} <a href="/">Back Home</a> {%endblock%}

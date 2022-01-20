@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+
+{%block title%}Users Home Page{%endblock%}
+
+{%block content%}
+<h1>{{people.first_name}} {{people.last_name}}</h1>
+<div class="outer_container">
+        <p>UserName: {{people.user_name}}</p>
+        <img src="{{people.img_url}}" alt="{{people.user_name}} photo" height="200px" width="200px">
+
+        <div class="inner_container">
+            <p><a href="/{{people.id}}/edit_user" class = "btn_add">Edit User</a></p>
+            <form action="/{{people.id}}/delete">
+                <button class=btn_remove>Delete User</button>
+            </form>
+        </div>
+    </div>
+
+
+{%endblock%}
+
+{%block footer%} <a href="/">Back Home</a> {%endblock%}
