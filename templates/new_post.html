@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+
+{%block content%}
+    <h1>Create A New Post for {{people.first_name}} {{people.last_name}}</h1>
+
+    <div class="outer_container, new_form">
+        <form method="POST">
+            <label for="title">Post Title</label>
+            <input type="text" name="title" id="title" placeholder="Enter a post title" style="width: 400px;" required>
+            <label for="content">Post Content</label>
+            <input type="text" name="content" id="content" placeholder="Enter your post content here" style = "height:200px;width: 400px;" required>
+        <div class="inner_container">
+            <button class = "btn_add">Add</button>
+        </form>
+        <form action="/{{people.id}}/details">
+            <button class = "btn_remove">Cancel</button>
+        </form>
+
+        </div>
+
+    </div>
+
+
+{%endblock%}
+
+{%block footer%} <a href="/">Back Home</a> {%endblock%}

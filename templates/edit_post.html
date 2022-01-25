@@ -1,0 +1,37 @@
+{%extends 'base.html'%}
+
+{%block content%}
+    <h1>Edit {{post.title}}</h1>
+
+    <!-- {%for msg in get_flashed_messages()%}
+        <p>{{msg}}</p>
+    {%endfor%} -->
+    <div class="outer_container">
+        <form method="POST" class="edit_form">
+
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" value="{{post.title}}" style = "width: 400px;">
+
+            <label for="content">Post Content</label>
+            <input type="text" name="content" id="content" style = "height:200px;width: 400px;" value="{{post.content}}"">
+
+            <label for="created_at">Created At</label>
+            <input type="text" name="created_at" id="created_at" style = "width: 400px;" value="{{post.created_at}}"">
+            
+            <div class="inner_container">
+
+                <button class = "btn_add">Update</button>
+
+            </form>
+            
+            <form action="/{{post.peoples_id}}/details">
+                <button class = "btn_remove">Cancel</button>
+            </form>
+
+            </div>
+    </div>
+
+
+{%endblock%}
+
+{%block footer%} <a href="/">Back Home</a> {%endblock%}

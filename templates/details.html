@@ -14,6 +14,21 @@
                 <button class=btn_remove>Delete User</button>
             </form>
         </div>
+        <h2>Posts</h2>
+        <ul>
+            {%for posts in post%}
+                {% if posts.peoples_id == people.id%}
+                    <li>
+                        <a href="/{{posts.id}}/post" class="list">{{posts.title}}</a>
+                    </li>
+                {%endif%}
+            {%endfor%}
+        </ul>
+
+        <form action="/{{people.id}}/details/new_post">
+            <button class="btn_add">Create New Post</button>
+        </form>
+
     </div>
 
 

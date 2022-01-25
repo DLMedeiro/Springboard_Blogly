@@ -4,7 +4,7 @@ from flask.templating import render_template_string
 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.util.langhelpers import method_is_overridden
-from models import db, connect_db, People
+from models import db, connect_db, People, Post
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -52,7 +52,10 @@ def user_profile(people_id):
     """Show user profile"""
 
     person = People.query.get_or_404(people_id)
-    return render_template("details.html", people = person)
+
+    post = Post.query.all()
+
+    return render_template("details.html", people = person, post = post)
 
 @app.route("/<int:people_id>/delete")
 def delete_profile(people_id):
@@ -90,3 +93,71 @@ def edit_user(people_id):
     # How do I have this redirect to the details page for the user being updated?
     return redirect("/" + str(people_id) + "/details")
     # return redirect("/")
+
+# Posts
+@app.route("/<int:people_id>/details/new_post")
+def new_post(people_id):
+    """form for new posts based on user profile"""
+    person = People.query.get(people_id)
+    return render_template("new_post.html", people = person)
+
+@app.route("/<int:people_id>/details/new_post", methods=["POST"])
+def add_post(people_id):
+    """add new post to db"""
+
+    title = request.form['title']
+    content = request.form['content']
+    peoples_id = people_id
+
+    post = Post(title=title, content=content, peoples_id=people_id)
+    db.session.add(post)
+    db.session.commit()
+
+    return redirect("/" + str(people_id) + "/details")
+
+@app.route("/<int:post_id>/post")
+def post_detail(post_id):
+    """Show user post"""
+
+    posts = Post.query.get_or_404(post_id)
+    person_id = posts.peoples_id
+    person = People.query.get_or_404(person_id)
+
+    return render_template("post.html", posts = posts, person = person, person_id = person_id)
+
+@app.route("/<int:post_id>/edit_post")
+def edit_post_page(post_id):
+    """Show post edit form"""
+
+    post = Post.query.get_or_404(post_id)
+    person_id = post.peoples_id
+    person = People.query.get_or_404(person_id)
+
+    return render_template("edit_post.html", post = post, person=person)
+
+@app.route("/<int:post_id>/edit_post", methods=["POST"])
+def edit_post(post_id):
+    """Make updates to the post in database"""
+    title = request.form['title']
+    content = request.form['content']
+    created_at = request.form['created_at']
+
+    post = Post.query.get(post_id)
+    peoples_id = post.peoples_id
+    post.edit_post_info(title, content, created_at, peoples_id)
+    db.session.add(post)
+    db.session.commit()
+# Not updating the post in the database, directing properly
+    return redirect("/" + str(post_id) + "/post")
+    # return redirect("/")
+
+
+@app.route("/<int:post_id>/deletepost")
+def delete_post(post_id):
+    """Delete post"""
+    post = Post.query.get_or_404(post_id)
+    person_id = post.peoples_id
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect("/" + str(person_id) + "/details")

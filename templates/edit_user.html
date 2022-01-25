@@ -3,9 +3,7 @@
 {%block content%}
     <h1>Edit {{people.first_name}}'s Account</h1>
 
-    <!-- {%for msg in get_flashed_messages()%}
-        <p>{{msg}}</p>
-    {%endfor%} -->
+
     <div class="outer_container">
         <form method="POST" class="edit_form">
             <label for="first_name">First Name</label>
@@ -19,7 +17,7 @@
         <div class="inner_container">
             <button class = "btn_add">Update</button>
         </form>
-        <form action="/">
+        <form action="/{{people.id}}/details">
             <button class = "btn_remove">Cancel</button>
         </form>
         </div>
