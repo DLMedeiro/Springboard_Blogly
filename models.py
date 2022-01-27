@@ -25,7 +25,6 @@ class People(db.Model):
 
     psts = db.relationship('Post', backref='peoples')
    
-    @classmethod
     def edit_user_info(self, f_name, l_name, u_name, url, ):
         """Edit user information in database"""
         self.first_name = f_name
@@ -53,7 +52,6 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime(),nullable=False, default=func.now())
     peoples_id = db.Column(db.Integer, db.ForeignKey('peoples.id'))
 
-    @classmethod
     def edit_post_info(self, title, content, created_at, peoples_id):
         """Edit post information in database"""
         self.title = title

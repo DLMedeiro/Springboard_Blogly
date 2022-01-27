@@ -85,12 +85,12 @@ def edit_user(people_id):
     user_name = request.form['user_name']
 
     person = People.query.get(people_id)
-    person.edit_user_info(first_name, last_name, user_name, image_url)
+    person.edit_user_info(str(first_name), str(last_name), str(user_name), str(image_url))
     db.session.add(person)
     db.session.commit()
 
 
-    # How do I have this redirect to the details page for the user being updated?
+ 
     return redirect("/" + str(people_id) + "/details")
     # return redirect("/")
 

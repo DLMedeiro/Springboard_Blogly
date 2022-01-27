@@ -5,12 +5,16 @@ from typing import ByteString
 from models import People, db, Post
 from app import app
 
+
+
 #Create tables
 db.drop_all()
 db.create_all()
 
 #If table isn't empty, empty it
 People.query.delete()
+Post.query.delete()
+
 
 #Create People
 john_lennon = People(first_name="John", last_name="Lennon", user_name="JL_Guitar")
