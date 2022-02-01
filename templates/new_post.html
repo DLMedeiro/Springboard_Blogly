@@ -9,6 +9,15 @@
             <input type="text" name="title" id="title" placeholder="Enter a post title" style="width: 400px;" required>
             <label for="content">Post Content</label>
             <input type="text" name="content" id="content" placeholder="Enter your post content here" style = "height:200px;width: 400px;" required>
+
+            <div id="radiobtns">
+                <h4>Tag Options</h4>
+                    {%for tag in taglist%}
+                    <input type="checkbox" name="TagID" value = "{{tag.name}}" id="radiobtns">
+                    <label for="tagID" id = "radiobtns">{{tag.name}}</label>
+                    {%endfor%}
+            </div>
+
         <div class="inner_container">
             <button class = "btn_add">Add</button>
         </form>

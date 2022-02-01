@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+
+{%block content%}
+    <h1>Edit Tag: {{tag.name}}</h1>
+
+    <div class="outer_container">
+        <form method="POST" class="edit_form">
+
+            <label for="name">Title</label>
+            <input type="text" name="name" id="name" value="{{tag.name}}" style = "width: 200px;">
+            
+            <div class="inner_container">
+
+                <button class = "btn_add">Update</button>
+
+            </form>
+            
+            <form action="tag_list/{{tag.id}}/details">
+                <button class = "btn_remove">Cancel</button>
+            </form>
+
+            </div>
+    </div>
+
+
+{%endblock%}
+
+{%block footer%} <a href="/">Back Home</a> {%endblock%}

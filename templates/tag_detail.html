@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+
+{%block title%}Users Home Page{%endblock%}
+
+{%block content%}
+<h1>Tag Name: {{tag.name}}</h1>
+<div class="outer_container">
+
+        <div class="inner_container">
+            <p><a href="/tag_list/{{tag.id}}/edit_tag" class = "btn_add">Edit Tag</a></p>
+            <form action="/tag_list/{{tag.id}}/deletetag">
+                <button class=btn_remove>Delete Tag</button>
+            </form>
+        </div>
+        <h2>Posts</h2>
+ 
+            <ul>
+                {%for post in postlist%}
+                    {%for posttitle in posttitles%}
+                        {% if post.posts_id == posttitle.id%}
+                            <li>
+                                <a href="/{{post.posts_id}}/post" class="list">{{posttitle.title}}</a>
+                            </li>
+                        {%endif%}
+                    {%endfor%}
+                {%endfor%}
+            </ul>
+
+    </div>
+
+
+{%endblock%}
+
+{%block footer%} <a href="/">Back Home</a> {%endblock%}

@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+
+{%block title%}Users Home Page{%endblock%}
+
+{%block content%}
+    <h1>List of all Tags</h1>
+    <div class="outer_container">
+        <ul>
+            {%for tag in tags%}
+                <li><a href="tag_list/{{tag.id}}/details" class="list">{{tag.name}}</a></li>
+            {%endfor%}
+        </ul>
+    
+        <form action="/new_tag">
+            <button class="btn_add">Add New Tag</button>
+        </form>
+
+    </div>
+
+
+{%endblock%}
+
+{%block footer%} <a href="/">Back Home</a> {%endblock%}

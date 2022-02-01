@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+
+{%block content%}
+    <h1>Create A Tag</h1>
+
+    <div class="outer_container, new_form">
+        <form method="POST">
+            <label for="title">Tag Name</label>
+            <input type="text" name="name" id="name" placeholder="Enter Tag Name" style="width: 200px;" required>
+        <div class="inner_container">
+            <button class = "btn_add">Add</button>
+        </form>
+        <form action="/tags_list">
+            <button class = "btn_remove">Cancel</button>
+        </form>
+
+        </div>
+
+    </div>
+
+
+{%endblock%}
+
+{%block footer%} <a href="/">Back Home</a> {%endblock%}

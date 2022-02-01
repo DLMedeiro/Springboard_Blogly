@@ -42,7 +42,7 @@ class People(db.Model):
 # a foreign key to the User table
 
 class Post(db.Model):
-    """Posts Model"""
+    """Post Model"""
 
     __tablename__ = "posts"
 
@@ -52,9 +52,41 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime(),nullable=False, default=func.now())
     peoples_id = db.Column(db.Integer, db.ForeignKey('peoples.id'))
 
+    posttag = db.relationship('PostTag', backref='post')
+    # connectedtags = db.relationship('Tag', secondary = 'posttags', backref='posts')
+
+
     def edit_post_info(self, title, content, created_at, peoples_id):
         """Edit post information in database"""
         self.title = title
         self.content= content
         self.created_at= created_at
         self.poeples_id= peoples_id
+
+class Tag(db.Model):
+    """Tag Model"""
+
+    __tablename__ = "tags"
+
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    name = db.Column(db.String(50),nullable=False, unique = True)
+
+    posttag = db.relationship('PostTag', backref='tag')
+
+    def edit_tag_info(self, name):
+        """Edit tag information in database"""
+        self.name = name
+
+class PostTag(db.Model):
+    """PostTag Model"""
+
+    __tablename__ = "posttags"
+
+    tags_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key = True, nullable=False)
+    posts_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key = True, nullable=False)
+
+    # def connect_tag(self, tags_id, posts_id)
+    # """adds post + tag connection to table"""
+    # self.tags_id = tags_id
+    # self.posts_id = posts_id
+    

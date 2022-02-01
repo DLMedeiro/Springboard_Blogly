@@ -1,6 +1,6 @@
 from unittest import TestCase
 from app import app
-from models import db, People, Post
+from models import db, People, Post, Tag, PostTag
 from sqlalchemy.sql import func
 
 # (venv) python -m unittest test_app.py
@@ -38,7 +38,7 @@ class PeopleModelTestCase(TestCase):
 
     def test_home(self):
         with app.test_client() as client:
-            resp = client.get("/")
+            resp = client.get("/home")
             html = resp.get_data(as_text = True)
 
             self.assertEqual(resp.status_code, 200)
@@ -99,3 +99,42 @@ class PostModelTestCase(TestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertIn('<a href="/1/post" class="list">Post 1</a>', html)
 
+# Tag tests
+class PostTagModelTestCase(TestCase):
+    def setUp(self):
+        """Clean up exisitng database"""
+        PostTag.query.delete()
+        Tag.query.delete()
+        Post.query.delete()
+        People.query.delete()
+        people = People(first_name = "FN_Test1", last_name = "LN_Test1", user_name = "UN_Test1")
+        db.session.add(people)
+        db.session.commit()
+        p1 = Post(title = "Post 1", content = "Post 1", created_at = func.now(), peoples_id = people.id)
+        db.session.add(p1)
+        db.session.commit()
+        tag = Tag(name = "Test Tag")
+        db.session.add(tag)
+        db.session.commit()
+        tag_connect = PostTag(tags_id = tag.id, posts_id = p1.id)
+        db.session.add(tag_connect)
+        db.session.commit()
+
+        self.people_id = people.id
+        self.post_id = p1.id
+        self.tag_id = tag.id
+        # Creates a reference to be used throughout the class
+
+    def tearDown(self):
+        """Clean up any fouled transaction"""
+
+        db.session.rollback()
+
+    def test_tag_detail(self):
+        with app.test_client() as client:
+            resp = client.get(f"/tag_list/{self.tag_id}/details")
+            html = resp.get_data(as_text = True)
+
+            self.assertEqual(resp.status_code, 200)
+            # Why does this pull "2"?
+            self.assertIn('<a href="/2/post" class="list">Post 1</a>', html)

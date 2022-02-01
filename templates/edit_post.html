@@ -13,8 +13,29 @@
             <input type="text" name="title" id="title" value="{{post.title}}" style = "width: 400px;">
 
             <label for="content">Post Content</label>
-            <input type="text" name="content" id="content" style = "height:200px;width: 400px;" value="{{post.content}}"">
+            <input type="text" name="content" id="content" style = "height:200px;width: 400px;" value="{{post.content}}">
+            <div id="radiobtns">
+                <h4>Tag Options</h4>
 
+                    {%for tag in taglist%}
+                        <input type="checkbox" name="tagID" value = "{{tag.name}}" id="radiobtns">
+                        <label for="tagID" id = "radiobtns">{{tag.name}}</label>
+                    {%endfor%}
+
+                    <!-- {%for tag in taglist%}
+                        {%for posttag in posttags%}
+                            {%if posttag.tags_id == tag.id%}
+                                <input type="checkbox" name="tagID" value = "{{tag.name}}" id="radiobtns">
+                                <label for="tagID" id = "radiobtns">{{tag.name}}</label>
+                            {%else%}
+                                <input type="checkbox" name="tagID" value = "{{tag.name}}" id="radiobtns">
+                                <label for="tagID" id = "radiobtns">{{tag.name}}</label>
+                            {%endif%}
+                        {%endfor%}
+                    {%endfor%} -->
+            </div>
+
+            
             <label for="created_at">Created At</label>
             <input type="text" name="created_at" id="created_at" style = "width: 400px;" value="{{post.created_at}}"">
             
