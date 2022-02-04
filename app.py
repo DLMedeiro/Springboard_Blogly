@@ -119,6 +119,7 @@ def add_post(people_id):
 
     # How to connect new post id to tags, when the post id isn't created until after the form is submitted
     selectedtags = request.form.getlist('tagID')
+
     if selectedtags:
         for tag in selectedtags:
             tag = Tag.query.filter(Tag.name == tag)

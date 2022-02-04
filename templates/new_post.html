@@ -13,7 +13,7 @@
             <div id="radiobtns">
                 <h4>Tag Options</h4>
                     {%for tag in taglist%}
-                    <input type="checkbox" name="TagID" value = "{{tag.name}}" id="radiobtns">
+                    <input type="checkbox" name="tagID" value = "{{tag.name}}" id="radiobtns">
                     <label for="tagID" id = "radiobtns">{{tag.name}}</label>
                     {%endfor%}
             </div>
