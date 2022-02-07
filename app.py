@@ -192,8 +192,14 @@ def edit_post(post_id):
 @app.route("/<int:post_id>/deletepost")
 def delete_post(post_id):
     """Delete post"""
+    
+    posttag = PostTag.query.filter_by(posts_id = post_id).delete()
+
     post = Post.query.get_or_404(post_id)
     person_id = post.peoples_id
+
+    db.session.commit()
+
     db.session.delete(post)
     db.session.commit()
 
@@ -238,6 +244,9 @@ def tag_detail(tag_id):
 @app.route("/tag_list/<int:tag_id>/deletetag")
 def delete_tag(tag_id):
     """Delete tag"""
+    posttag = PostTag.query.filter_by(tags_id = tag_id).delete()
+    db.session.commit()
+    
     tag = Tag.query.get_or_404(tag_id)
     db.session.delete(tag)
     db.session.commit()

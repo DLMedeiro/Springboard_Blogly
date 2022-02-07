@@ -53,7 +53,7 @@ class Post(db.Model):
     peoples_id = db.Column(db.Integer, db.ForeignKey('peoples.id'))
 
     posttag = db.relationship('PostTag', backref='post')
-    # connectedtags = db.relationship('Tag', secondary = 'posttags', backref='posts')
+    connectedtags = db.relationship('Tag', secondary = 'posttags', backref='posts')
 
 
     def edit_post_info(self, title, content, created_at, peoples_id):
